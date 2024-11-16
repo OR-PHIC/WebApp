@@ -1,4 +1,4 @@
-document.getElementById('city').addEventListener('input', function () { 
+document.getElementById('city').addEventListener('input', function () {
     var city = this.value;
     getWeather(city);
 });
@@ -111,7 +111,7 @@ function getWindSignal(windSpeed) {
     }
 
     return { windSignal, windColor };
-    
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
