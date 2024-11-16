@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+    <title>Document</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
+
+    :root {
+        --gradient: linear-gradient(135deg, #3c4d6d 10%, #001f3d 100%);
+    }
+
+    * {
+        box-sizing: border-box;
+        line-height: 1.25em;
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        font-family: 'Montserrat', sans-serif;
+        background: var(--gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .navbar {
+        width: 100%;
+        background-color: linear-gradient(135deg, #3c4d6d 10%, #001f3d 100%);
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 50px;
+        position: absolute;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar .logo {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .navbar ul {
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar li {
+        margin-right: 20px;
+    }
+
+    .navbar li:last-child {
+        margin-right: 0;
+    }
+
+    .navbar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+        color: #72EDF2;
+    }
+
+    .container {
+        border-radius: 25px;
+        color: #ffffff;
+        height: 400px;
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 80px;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .weather-side {
+        position: relative;
+        height: 100%;
+        border-radius: 25px;
+        background-image: url("https://img.freepik.com/free-photo/sunset-beach-sea-wave_1150-11145.jpg");
+        width: 300px;
+        box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+        transition: transform 300ms ease;
+        transform: translateZ(0) scale(1.02) perspective(1000px);
+        float: left;
+    }
+
+    .weather-side:hover {
+        transform: scale(1.1) perspective(1500px) rotateY(10deg);
+    }
+
+    .weather-gradient {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: var(--gradient);
+        border-radius: 25px;
+        opacity: 0.4;
+    }
+
+    .date-container {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+    }
+
+    .date-dayname {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .date-day {
+        display: block;
+        font-size: 1.2rem;
+    }
+
+    .location {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 1.1rem;
+    }
+
+    .weather-container {
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+    }
+
+    .weather-icon img {
+        filter: drop-shadow(0 0 2px #fff);
+        width: 50px;
+    }
+
+    .weather-temp {
+        margin: 0;
+        font-weight: 700;
+        font-size: 4em;
+    }
+
+    .weather-desc {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .info-side {
+        position: relative;
+        float: left;
+        height: 100%;
+        width: 60%;
+        padding-top: 25px;
+        padding-left: 20px;
+    }
+
+    .today-info {
+        padding: 15px;
+        margin: 0 25px 25px 25px;
+        box-shadow: 0 0 50px -5px rgba(0, 0, 0);
+        border-radius: 10px;
+    }
+
+    .today-info>div:not(:last-child) {
+        margin: 0 0 10px 0;
+    }
+
+    .today-info>div .title {
+        font-weight: 700;
+    }
+
+    .today-info>div .value {
+        float: right;
+    }
+
+    .wind-signal {
+        font-weight: 700;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: #ffdd57;
+    }
+
+    .week-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 35px;
+        box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+    }
+
+    .week-list>li {
+        float: left;
+        padding: 15px;
+        cursor: pointer;
+        transition: 200ms ease;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .week-list>li:hover {
+        transform: scale(1.1);
+        background: #fff;
+        color: #222831;
+        box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2)
+    }
+
+    .week-list>li.active {
+        background: #fff;
+        color: #222831;
+        border-radius: 10px;
+    }
+
+    .week-list>li .day-name {
+        display: block;
+        margin: 10px 0 0 0;
+        font-size: 1.1rem;
+    }
+
+    .week-list>li .day-icon {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: auto;
+        margin: 0 auto;
+        font-size: 35px;
+    }
+
+    .week-list>li .day-icon img {
+        filter: drop-shadow(0 0 2px white);
+    }
+
+    .week-list>li .day-temp {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .location-container {
+        padding: 25px 35px;
+        margin-top: 25%;
+    }
+
+    .location-input {
+        position: relative;
+        width: 100%;
+        border: none;
+        border-radius: 25px;
+        padding: 10px;
+        font-family: 'Montserrat', sans-serif;
+        background-image: var(--gradient);
+        color: #ffffff;
+        font-weight: 700;
+        box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+        transition: transform 200ms ease;
+    }
+
+    .location-input:hover {
+        transform: scale(0.95);
+    }
+
+    .sections {
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 50px;
+        padding: 0 10px;
+    }
+
+    .about-section,
+    .campaign-section {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section h2,
+    .campaign-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .about-section p,
+    .campaign-section p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .campaign-btn {
+        background: #72EDF2;
+        border: none;
+        padding: 10px 25px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #222831;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .campaign-btn:hover {
+        background: #4d7b8b;
+    }
+</style>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="#" class="logo">ORPHIC</a>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Campaigns</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="weather-side">
+            <div class="weather-gradient"></div>
+            <div class="date-container">
+                <h2 class="date-dayname"></h2>
+                <span class="date-day"></span>
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="location"></span>
+            </div>
+            <div class="weather-container">
+                <span class="weather-icon"></span>
+                <h1 class="weather-temp"></h1>
+                <h3 class="weather-desc"></h3>
+            </div>
+        </div>
+        <div class="info-side">
+            <div class="today-info-container">
+                <div class="today-info">
+                    <div class="humidity">
+                        <span class="title"><i class="fa-solid fa-droplet"></i> HUMIDITY</span>
+                        <span class="value"></span>
+                    </div>
+                    <div class="wind">
+                        <span class="title"><i class="fa-solid fa-wind"></i> WIND</span>
+                        <span class="value"></span>
+                    </div>
+                    <!-- Wind Signal Section -->
+                    <div class="wind-signal">
+                        <span id="wind-signal">Wind Signal: N/A</span>
+                    </div>
+                </div>
+            </div>
+            <div class="week-container">
+                <ul class="week-list">
+                    <li>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
+                    </li>
+                    <li>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
+                    </li>
+                    <li>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
+                    </li>
+                    <li>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="location-container">
+                <input class="location-input" type="text" id="city" value="Manolo Fortich">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sections -->
+    <section class="sections">
+        <div class="campaign-section">
+            <h2>Join Our Climate Awareness Campaign!</h2>
+            <p>Our mission is to raise awareness about climate change and promote sustainable living...</p>
+            <button class="campaign-btn" onclick="joinCampaign()">Join Campaign</button>
+        </div>
+
+        <div class="about-section">
+            <h2>About WeatherApp</h2>
+            <p>This app provides real-time weather information by fetching data from OpenWeatherMap API...</p>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="Home.js"></script>
+</body>
+
+</html>
+
+
+
