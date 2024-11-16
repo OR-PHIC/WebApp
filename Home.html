@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <title>Document</title>
 </head>
 
@@ -322,10 +324,26 @@
         background: #00A3E0;
     }
 
+    .applet-container {
+        text-align: center;
+        background-color: #3c4d6d50;
+        color: #ffffff;
+        border: #fff solid 1px;
+        box-shadow: 0 0 15px rgb(138, 153, 218);
+        margin-top: 1rem;
+        margin-left: 1rem;
+        width: 60%;
+        border-radius: 20px;
+    }
+
+    #map {
+        height: 600px;
+    }
+
     /* Add transitions and additional styles here */
 </style>
 
-<body>
+<body>  
 
     <!-- Navigation Bar -->
     <div class="navbar">
@@ -335,18 +353,6 @@
             <li><a href="#">Campaigns</a></li>
             <li><a href="#">About</a></li>
         </ul>
-    </div>
-
-    <!-- Embed Map Section -->
-    <div class="map-container" style="width: 100%; max-width: 1200px; margin-top: 80px;">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7917.264973036734!2d124.9290101263152!3d8.413333602965118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b3831a08898969%3A0x87f2f0e3c97ab6bc!2sManolo%20Fortich%2C%20Bukidnon%2C%20Philippines!5e0!3m2!1sen!2sph!4v1699824030308!5m2!1sen!2sph" 
-            width="100%" 
-            height="400" 
-            style="border:0; border-radius: 8px;" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
     </div>
 
     <!-- Main Content -->
@@ -360,7 +366,8 @@
                 <span class="location">Manolo Fortich, Bukidnon</span>
             </div>
             <div class="weather-container">
-                <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png" alt="clear sky"></span>
+                <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png"
+                        alt="clear sky"></span>
                 <h1 class="weather-temp">26°C</h1>
                 <h3 class="weather-desc">Clear Sky</h3>
             </div>
@@ -381,29 +388,30 @@
                         <span id="wind-signal">Wind Signal: N/A</span>
                     </div>
                 </div>
-            </div>
+            </div>  
             <div class="week-container">
                 <ul class="week-list">
                     <li>
-                        <span class="day-name">Mon</span>
-                        <span class="day-temp">27°C</span>
-                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c02d.png" alt="few clouds"></span>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
                     </li>
                     <li>
-                        <span class="day-name">Tue</span>
-                        <span class="day-temp">24°C</span>
-                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c03d.png" alt="scattered clouds"></span>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
                     </li>
                     <li>
-                        <span class="day-name">Wed</span>
-                        <span class="day-temp">22°C</span>
-                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c04d.png" alt="broken clouds"></span>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
                     </li>
                     <li>
-                        <span class="day-name">Thu</span>
-                        <span class="day-temp">20°C</span>
-                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c10d.png" alt="showers"></span>
+                        <span class="day-name"></span>
+                        <span class="day-temp"></span>
+                        <span class="day-icon"></span>
                     </li>
+                    <div class="clear"></div>
                 </ul>
             </div>
             <div class="location-container">
@@ -411,6 +419,58 @@
             </div>
         </div>
     </div>
+
+    <!-- Embed Map Section -->
+    <div class="applet-container">
+        <h3>Evacuation Sites</h3>
+        <div id="map"></div>
+
+    </div>
+
+    <script>
+        class LeafletMap {
+
+            constructor(containerId, center, zoom) {
+                this.map = L.map(containerId).setView(center, zoom);
+                this.initTileLayer();
+            }
+
+            initTileLayer() {
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 15,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(this.map);
+            }
+
+            addMarker(lat, lng, message) {
+                const marker = L.marker([lat, lng]).addTo(this.map);
+                marker.bindPopup(message);
+            }
+
+            loadMarkersFromJson(url) {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(marker => {
+                            this.addMarker(marker.latitude, marker.longitude, marker.message);
+                        });
+                    })
+                    .catch(error => console.error('Error loading markers:', error));
+            }
+        }
+
+        const myMap = new LeafletMap('map', [8.367914, 124.865813], 18);
+
+        /*
+        myMap.addMarker(8.359735, 124.869206, 'CCS Faculty Office');
+        myMap.addMarker(8.359639,124.869179, 'CCS Laboratory 1');
+        myMap.addMarker(8.359554,124.869153, 'CCS Laboratory 2');
+        */
+
+        myMap.loadMarkersFromJson('Map.json');
+
+    </script>
+
 
     <!-- Sections -->
     <section class="sections">
