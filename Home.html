@@ -24,8 +24,6 @@
 
     body {
         margin: 0;
-        width: 100%;
-        height: 100vh;
         font-family: 'Montserrat', sans-serif;
         background: var(--gradient);
         display: flex;
@@ -314,15 +312,17 @@
         padding: 10px 25px;
         font-size: 1.2rem;
         font-weight: bold;
-        color: #222831;
-        border-radius: 25px;
+        color: #2E3C45;
+        border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: 200ms ease;
     }
 
     .campaign-btn:hover {
-        background: #4d7b8b;
+        background: #00A3E0;
     }
+
+    /* Add transitions and additional styles here */
 </style>
 
 <body>
@@ -331,10 +331,22 @@
     <div class="navbar">
         <a href="index.html" class="logo">ORPHIC</a>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="Home.html">Home</a></li>
             <li><a href="#">Campaigns</a></li>
             <li><a href="#">About</a></li>
         </ul>
+    </div>
+
+    <!-- Embed Map Section -->
+    <div class="map-container" style="width: 100%; max-width: 1200px; margin-top: 80px;">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7917.264973036734!2d124.9290101263152!3d8.413333602965118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b3831a08898969%3A0x87f2f0e3c97ab6bc!2sManolo%20Fortich%2C%20Bukidnon%2C%20Philippines!5e0!3m2!1sen!2sph!4v1699824030308!5m2!1sen!2sph" 
+            width="100%" 
+            height="400" 
+            style="border:0; border-radius: 8px;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
     </div>
 
     <!-- Main Content -->
@@ -342,15 +354,15 @@
         <div class="weather-side">
             <div class="weather-gradient"></div>
             <div class="date-container">
-                <h2 class="date-dayname"></h2>
-                <span class="date-day"></span>
+                <h2 class="date-dayname">Sunday</h2>
+                <span class="date-day">October 15, 2024</span>
                 <i class="fa-solid fa-location-dot"></i>
-                <span class="location"></span>
+                <span class="location">Manolo Fortich, Bukidnon</span>
             </div>
             <div class="weather-container">
-                <span class="weather-icon"></span>
-                <h1 class="weather-temp"></h1>
-                <h3 class="weather-desc"></h3>
+                <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png" alt="clear sky"></span>
+                <h1 class="weather-temp">26°C</h1>
+                <h3 class="weather-desc">Clear Sky</h3>
             </div>
         </div>
         <div class="info-side">
@@ -358,11 +370,11 @@
                 <div class="today-info">
                     <div class="humidity">
                         <span class="title"><i class="fa-solid fa-droplet"></i> HUMIDITY</span>
-                        <span class="value"></span>
+                        <span class="value">60%</span>
                     </div>
                     <div class="wind">
                         <span class="title"><i class="fa-solid fa-wind"></i> WIND</span>
-                        <span class="value"></span>
+                        <span class="value">10 km/h</span>
                     </div>
                     <!-- Wind Signal Section -->
                     <div class="wind-signal">
@@ -373,24 +385,24 @@
             <div class="week-container">
                 <ul class="week-list">
                     <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
+                        <span class="day-name">Mon</span>
+                        <span class="day-temp">27°C</span>
+                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c02d.png" alt="few clouds"></span>
                     </li>
                     <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
+                        <span class="day-name">Tue</span>
+                        <span class="day-temp">24°C</span>
+                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c03d.png" alt="scattered clouds"></span>
                     </li>
                     <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
+                        <span class="day-name">Wed</span>
+                        <span class="day-temp">22°C</span>
+                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c04d.png" alt="broken clouds"></span>
                     </li>
                     <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
+                        <span class="day-name">Thu</span>
+                        <span class="day-temp">20°C</span>
+                        <span class="day-icon"><img src="https://www.weatherbit.io/static/img/icons/c10d.png" alt="showers"></span>
                     </li>
                 </ul>
             </div>
