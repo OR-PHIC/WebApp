@@ -352,6 +352,7 @@
             <li><a href="Home.html">Home</a></li>
             <li><a href="#">Campaigns</a></li>
             <li><a href="#">About</a></li>
+            <li><a href="index.html">Exit</a></li>
         </ul>
     </div>
 
@@ -461,12 +462,6 @@
 
         const myMap = new LeafletMap('map', [8.367914, 124.865813], 18);
 
-        /*
-        myMap.addMarker(8.359735, 124.869206, 'CCS Faculty Office');
-        myMap.addMarker(8.359639,124.869179, 'CCS Laboratory 1');
-        myMap.addMarker(8.359554,124.869153, 'CCS Laboratory 2');
-        */
-
         myMap.loadMarkersFromJson('Map.json');
 
     </script>
@@ -476,15 +471,21 @@
     <section class="sections">
         <div class="campaign-section">
             <h2>Join Our Climate Awareness Campaign!</h2>
-            <p>Our mission is to raise awareness about climate change and promote sustainable living...</p>
+            <p>At Orphic, we are deeply committed to addressing the urgent challenges of climate change. Our mission is to raise awareness about the impact of global warming and to encourage sustainable practices that help protect our environment. Through this campaign, we aim to inspire individuals, communities, and organizations to take proactive actions in reducing their carbon footprint, conserving natural resources, and promoting eco-friendly alternatives.</p>
+            
+            <p>By joining this movement, you’ll be part of a collective effort to make a tangible difference. Together, we can spread knowledge, advocate for policy change, and adopt practices that prioritize the health of our planet. Whether it’s reducing waste, conserving energy, or supporting sustainable agriculture, every small action counts. Let’s work together to ensure a greener, more sustainable future for all.</p>
+            
             <button class="campaign-btn" onclick="joinCampaign()">Join Campaign</button>
         </div>
-
+    
         <div class="about-section">
-            <h2>About WeatherApp</h2>
-            <p>This app provides real-time weather information by fetching data from OpenWeatherMap API...</p>
+            <h2>About Orphic</h2>
+            <p>Orphic is an innovative platform that provides real-time weather updates tailored to the local climate of Manolo Fortich, Bukidnon. Our goal is to help residents and visitors stay informed about current weather conditions, including temperature, humidity, wind speeds, and more, all of which can significantly influence daily activities and the environment.</p>
+    
+            <p>By offering accurate and timely weather forecasts, Orphic empowers the community to make informed decisions about their day-to-day activities. Whether you're planning outdoor events, agriculture activities, or just need to know the weather for travel purposes, Orphic has got you covered. We are dedicated to improving the lives of people in Manolo Fortich by providing essential weather information to help them better prepare for the elements and adapt to local climate patterns.</p>
         </div>
     </section>
+    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
