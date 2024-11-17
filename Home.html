@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="weatherStatus.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <title>Document</title>
 </head>
@@ -77,207 +78,7 @@
 
     .navbar a:hover {
         color: #72EDF2;
-    }
-
-    .container {
-        border-radius: 25px;
-        color: #ffffff;
-        height: 400px;
-        width: 90%;
-        max-width: 1200px;
-        margin-top: 80px;
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-    }
-
-    .weather-side {
-        position: relative;
-        height: 100%;
-        border-radius: 25px;
-        background-image: url("https://img.freepik.com/free-photo/sunset-beach-sea-wave_1150-11145.jpg");
-        width: 300px;
-        box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
-        transition: transform 300ms ease;
-        transform: translateZ(0) scale(1.02) perspective(1000px);
-        float: left;
-    }
-
-    .weather-side:hover {
-        transform: scale(1.1) perspective(1500px) rotateY(10deg);
-    }
-
-    .weather-gradient {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-image: var(--gradient);
-        border-radius: 25px;
-        opacity: 0.4;
-    }
-
-    .date-container {
-        position: absolute;
-        top: 25px;
-        left: 25px;
-    }
-
-    .date-dayname {
-        margin: 0;
-        font-size: 1.5rem;
-    }
-
-    .date-day {
-        display: block;
-        font-size: 1.2rem;
-    }
-
-    .location {
-        display: inline-block;
-        margin-top: 10px;
-        font-size: 1.1rem;
-    }
-
-    .weather-container {
-        position: absolute;
-        bottom: 25px;
-        left: 25px;
-    }
-
-    .weather-icon img {
-        filter: drop-shadow(0 0 2px #fff);
-        width: 50px;
-    }
-
-    .weather-temp {
-        margin: 0;
-        font-weight: 700;
-        font-size: 4em;
-    }
-
-    .weather-desc {
-        margin: 0;
-        font-size: 1.2rem;
-    }
-
-    .info-side {
-        position: relative;
-        float: left;
-        height: 100%;
-        width: 60%;
-        padding-top: 25px;
-        padding-left: 20px;
-    }
-
-    .today-info {
-        padding: 15px;
-        margin: 0 25px 25px 25px;
-        box-shadow: 0 0 50px -5px rgba(0, 0, 0);
-        border-radius: 10px;
-    }
-
-    .today-info>div:not(:last-child) {
-        margin: 0 0 10px 0;
-    }
-
-    .today-info>div .title {
-        font-weight: 700;
-    }
-
-    .today-info>div .value {
-        float: right;
-    }
-
-    .wind-signal {
-        font-weight: 700;
-        margin-top: 10px;
-        font-size: 1.1rem;
-        color: #ffdd57;
-    }
-
-    .week-list {
-        list-style-type: none;
-        padding: 0;
-        margin: 10px 35px;
-        box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-    }
-
-    .week-list>li {
-        float: left;
-        padding: 15px;
-        cursor: pointer;
-        transition: 200ms ease;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .week-list>li:hover {
-        transform: scale(1.1);
-        background: #fff;
-        color: #222831;
-        box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2)
-    }
-
-    .week-list>li.active {
-        background: #fff;
-        color: #222831;
-        border-radius: 10px;
-    }
-
-    .week-list>li .day-name {
-        display: block;
-        margin: 10px 0 0 0;
-        font-size: 1.1rem;
-    }
-
-    .week-list>li .day-icon {
-        display: flex;
-        margin-top: 20px;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        width: auto;
-        margin: 0 auto;
-        font-size: 35px;
-    }
-
-    .week-list>li .day-icon img {
-        filter: drop-shadow(0 0 2px white);
-    }
-
-    .week-list>li .day-temp {
-        display: block;
-        text-align: center;
-        margin-top: 15px;
-        font-weight: 700;
-        margin-bottom: 25px;
-    }
-
-    .location-container {
-        padding: 25px 35px;
-        margin-top: 25%;
-    }
-
-    .location-input {
-        position: relative;
-        width: 100%;
-        border: none;
-        border-radius: 25px;
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        background-image: var(--gradient);
-        color: #ffffff;
-        font-weight: 700;
-        box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
-        transition: transform 200ms ease;
-    }
-
-    .location-input:hover {
-        transform: scale(0.95);
-    }
+    }   
 
     .sections {
         width: 90%;
@@ -324,26 +125,66 @@
         background: #00A3E0;
     }
 
-    .applet-container {
-        text-align: center;
-        background-color: #3c4d6d50;
+    .evacuationSection {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+    }
+
+    .evacuationText {
+        flex: 1;
+        max-width: 45%;
+        margin-right: 2rem;
+    }
+
+    .evacuationText h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #dfdc58;
+    }
+
+    .evacuationText p {
+        font-size: 1rem;
+        line-height: 1.6;
         color: #ffffff;
-        border: #fff solid 1px;
-        box-shadow: 0 0 15px rgb(138, 153, 218);
-        margin-top: 1rem;
-        margin-left: 1rem;
-        width: 60%;
-        border-radius: 20px;
+        margin-bottom: 1.2rem;
+    }
+
+    .applet-container {
+        flex: 1;
+        max-width: 45%;
+        min-width: 300px;
+    }
+
+    .applet-container h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #e98848;
+    }
+
+    .windyMap {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 25px;
     }
 
     #map {
         height: 600px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.726);
+        border: 2px #ffffff solid;
+
     }
 
     /* Add transitions and additional styles here */
 </style>
 
-<body>  
+<body>
 
     <!-- Navigation Bar -->
     <div class="navbar">
@@ -357,135 +198,138 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="weather-side">
-            <div class="weather-gradient"></div>
-            <div class="date-container">
-                <h2 class="date-dayname">Sunday</h2>
-                <span class="date-day">October 15, 2024</span>
-                <i class="fa-solid fa-location-dot"></i>
-                <span class="location">Manolo Fortich, Bukidnon</span>
-            </div>
-            <div class="weather-container">
-                <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png"
-                        alt="clear sky"></span>
-                <h1 class="weather-temp">26°C</h1>
-                <h3 class="weather-desc">Clear Sky</h3>
-            </div>
-        </div>
-        <div class="info-side">
-            <div class="today-info-container">
-                <div class="today-info">
-                    <div class="humidity">
-                        <span class="title"><i class="fa-solid fa-droplet"></i> HUMIDITY</span>
-                        <span class="value">60%</span>
+    <main>
+
+        <section class="weatherStatus">
+            <div class="container">
+                <div class="weather-side">
+                    <div class="weather-gradient"></div>
+                    <div class="date-container">
+                        <h2 class="date-dayname"></h2>
+                        <span class="date-day"></span>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="location">Manolo Fortich, Bukidnon</span>
                     </div>
-                    <div class="wind">
-                        <span class="title"><i class="fa-solid fa-wind"></i> WIND</span>
-                        <span class="value">10 km/h</span>
-                    </div>
-                    <!-- Wind Signal Section -->
-                    <div class="wind-signal">
-                        <span id="wind-signal">Wind Signal: N/A</span>
+                    <div class="weather-container">
+                        <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png"
+                                alt="clear sky"></span>
+                        <h1 class="weather-temp"></h1>
+                        <h3 class="weather-desc"></h3>
                     </div>
                 </div>
-            </div>  
-            <div class="week-container">
-                <ul class="week-list">
-                    <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
-                    </li>
-                    <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
-                    </li>
-                    <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
-                    </li>
-                    <li>
-                        <span class="day-name"></span>
-                        <span class="day-temp"></span>
-                        <span class="day-icon"></span>
-                    </li>
-                    <div class="clear"></div>
-                </ul>
+                <div class="info-side">
+                    <div class="today-info-container">
+                        <div class="today-info">
+                            <div class="humidity">
+                                <span class="title"><i class="fa-solid fa-droplet"></i> HUMIDITY</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="wind">
+                                <span class="title"><i class="fa-solid fa-wind"></i> WIND</span>
+                                <span class="value"></span>
+                            </div>
+                            <!-- Wind Signal Section -->
+                            <div class="wind-signal">
+                                <span id="wind-signal">Wind Signal: N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="week-container">
+                        <ul class="week-list">
+                            <li>
+                                <span class="day-name"></span>
+                                <span class="day-temp"></span>
+                                <span class="day-icon"></span>
+                            </li>
+                            <li>
+                                <span class="day-name"></span>
+                                <span class="day-temp"></span>
+                                <span class="day-icon"></span>
+                            </li>
+                            <li>
+                                <span class="day-name"></span>
+                                <span class="day-temp"></span>
+                                <span class="day-icon"></span>
+                            </li>
+                            <li>
+                                <span class="day-name"></span>
+                                <span class="day-temp"></span>
+                                <span class="day-icon"></span>
+                            </li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="location-container">
+                        <input class="location-input" type="text" id="city" value="Manolo Fortich"
+                            style="border: 1px solid white;">
+                    </div>
+                </div>
             </div>
-            <div class="location-container">
-                <input class="location-input" type="text" id="city" value="Manolo Fortich">
+
+        </section>
+
+        <!-- Embed Map Section -->
+        <section class="evacuationSection">
+            <div class="evacuationText">
+                <h1>Manolo Fortich: A Snapshot</h1>
+                <p>Manolo Fortich, located in the province of Bukidnon, is a town that is home to 22 barangays
+                    (villages). In times of natural disasters or emergencies, it's important for the local community to
+                    be prepared and aware of safe evacuation routes and designated evacuation sites.</p>
+                <p>Here are some of the key evacuation sites that have been designated to help residents of Manolo
+                    Fortich during emergencies:</p>
             </div>
-        </div>
-    </div>
+            <div class="applet-container">
+                <h3>Evacuation Sites</h3>
+                <div id="map"></div>
+                <script src="LeafletMap.js"></script>
+            </div>
+        </section>
 
-    <!-- Embed Map Section -->
-    <div class="applet-container">
-        <h3>Evacuation Sites</h3>
-        <div id="map"></div>
+        <!-- Sections -->
+        <section class="sections">
+            <div class="campaign-section">
+                <h2>Stay Informed with Accurate Weather Updates</h2>
+                <p>At Orphic, we provide real-time weather information to help you plan your day and stay safe in any
+                    condition. Our goal is to offer reliable forecasts and keep you connected with changing weather
+                    patterns.</p>
 
-    </div>
+                <p>Whether it's a sunny day or a stormy night, we’ve got you covered. Stay prepared and make informed
+                    decisions with our easy-to-use weather app.</p>
 
-    <script>
-        class LeafletMap {
+                <button class="campaign-btn" onclick="downloadApp()">Get the App</button>
 
-            constructor(containerId, center, zoom) {
-                this.map = L.map(containerId).setView(center, zoom);
-                this.initTileLayer();
-            }
+            </div>
 
-            initTileLayer() {
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 15,
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(this.map);
-            }
+            <div class="windyMap">
+                <h2>Explore Live Weather Data with Windy</h2>
+                <p>Get detailed weather forecasts, interactive maps, and live data for any location with Windy. Stay
+                    informed and plan ahead with the most accurate weather information.</p>
 
-            addMarker(lat, lng, message) {
-                const marker = L.marker([lat, lng]).addTo(this.map);
-                marker.bindPopup(message);
-            }
+                <iframe src="https://embed.windy.com/?10.828,123.464,7,m:eflajEQ" class="mapFrame" width="100%"
+                    height="500" frameborder="1" allowfullscreen></iframe>
 
-            loadMarkersFromJson(url) {
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(marker => {
-                            this.addMarker(marker.latitude, marker.longitude, marker.message);
-                        });
-                    })
-                    .catch(error => console.error('Error loading markers:', error));
-            }
-        }
+            </div>
 
-        const myMap = new LeafletMap('map', [8.367914, 124.865813], 18);
+            <div class="about-section">
+                <h2>About Orphic</h2>
+                <p>Orphic is an innovative platform that provides real-time weather updates tailored to the local
+                    climate of
+                    Manolo Fortich, Bukidnon. Our goal is to help residents and visitors stay informed about current
+                    weather
+                    conditions, including temperature, humidity, wind speeds, and more, all of which can significantly
+                    influence daily activities and the environment.</p>
 
-        myMap.loadMarkersFromJson('Map.json');
+                <p>By offering accurate and timely weather forecasts, Orphic empowers the community to make informed
+                    decisions about their day-to-day activities. Whether you're planning outdoor events, agriculture
+                    activities, or just need to know the weather for travel purposes, Orphic has got you covered. We are
+                    dedicated to improving the lives of people in Manolo Fortich by providing essential weather
+                    information
+                    to help them better prepare for the elements and adapt to local climate patterns.</p>
 
-    </script>
+            </div>
+        </section>
+    </main>
 
-
-    <!-- Sections -->
-    <section class="sections">
-        <div class="campaign-section">
-            <h2>Join Our Climate Awareness Campaign!</h2>
-            <p>At Orphic, we are deeply committed to addressing the urgent challenges of climate change. Our mission is to raise awareness about the impact of global warming and to encourage sustainable practices that help protect our environment. Through this campaign, we aim to inspire individuals, communities, and organizations to take proactive actions in reducing their carbon footprint, conserving natural resources, and promoting eco-friendly alternatives.</p>
-            
-            <p>By joining this movement, you’ll be part of a collective effort to make a tangible difference. Together, we can spread knowledge, advocate for policy change, and adopt practices that prioritize the health of our planet. Whether it’s reducing waste, conserving energy, or supporting sustainable agriculture, every small action counts. Let’s work together to ensure a greener, more sustainable future for all.</p>
-            
-            <button class="campaign-btn" onclick="joinCampaign()">Join Campaign</button>
-        </div>
-    
-        <div class="about-section">
-            <h2>About Orphic</h2>
-            <p>Orphic is an innovative platform that provides real-time weather updates tailored to the local climate of Manolo Fortich, Bukidnon. Our goal is to help residents and visitors stay informed about current weather conditions, including temperature, humidity, wind speeds, and more, all of which can significantly influence daily activities and the environment.</p>
-    
-            <p>By offering accurate and timely weather forecasts, Orphic empowers the community to make informed decisions about their day-to-day activities. Whether you're planning outdoor events, agriculture activities, or just need to know the weather for travel purposes, Orphic has got you covered. We are dedicated to improving the lives of people in Manolo Fortich by providing essential weather information to help them better prepare for the elements and adapt to local climate patterns.</p>
-        </div>
-    </section>
-    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
