@@ -1,397 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
-    />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="weatherStatus.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
-    <title>ORPHIC</title>
-  </head>
 
-  <style>
-    @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap");
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="weatherStatus.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
 
-    :root {
-      --gradient: linear-gradient(135deg, #3c4d6d 10%, #001f3d 100%);
-    }
+  <link rel="stylesheet" href="card.css">
+  <title>ORPHIC</title>
+</head>
 
-    * {
-      box-sizing: border-box;
-      line-height: 1.25em;
-    }
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap");
 
-    body {
-      margin: 0;
-      font-family: "Montserrat", sans-serif;
-      background: var(--gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
+  :root {
+    --gradient: linear-gradient(135deg, #3c4d6d 10%, #001f3d 100%);
+  }
 
-    .navbar {
-      width: 100%;
-      background-color: #001f3d;
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 50px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+  * {
+    box-sizing: border-box;
+    line-height: 1.25em;
+    /*border: 0.1px solid red;*/
+  }
 
-    .navbar .logo {
-      color: #fff;
-      font-size: 24px;
-      font-weight: 700;
-      text-decoration: none;
-    }
+  body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
-    .navbar ul {
-      display: flex;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+  .navbar {
+    width: 100%;
+    background-color: #001f3d;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-    .navbar li {
-      margin-right: 20px;
-    }
+  .navbar .logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+  }
 
-    .navbar li:last-child {
-      margin-right: 0;
-    }
+  .navbar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    .navbar a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+  .navbar li {
+    margin-right: 20px;
+  }
 
-    .navbar a:hover {
-      color: #72edf2;
-    }
+  .navbar li:last-child {
+    margin-right: 0;
+  }
 
-    .NavbarSections {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
 
-    .NavbarSections > div {
-      width: 100%;
-      max-width: 60%;
-      margin: 20px 0;
-    }
+  .navbar a:hover {
+    color: #72edf2;
+  }
 
-    .evacuationSection {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 2rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
+  .NavbarSections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
 
-    .evacuationText {
-      flex: 1;
-      max-width: 45%;
-      margin-right: 2rem;
-    }
+  .NavbarSections>div {
+    width: 100%;
+    max-width: 60%;
+    margin: 20px 0;
+  }
 
-    .evacuationText h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #dfdc58;
-    }
+  .evacuationSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
 
-    .evacuationText p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ffffff;
-      margin-bottom: 1.2rem;
-    }
+  .evacuationText {
+    flex: 1;
+    max-width: 45%;
+    margin-right: 2rem;
+  }
 
-    .applet-container {
-      flex: 1;
-      max-width: 45%;
-      min-width: 300px;
-    }
+  .evacuationText h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #dfdc58;
+  }
 
-    .applet-container h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #e98848;
-    }
+  .evacuationText p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 1.2rem;
+  }
 
-    .campaign-section,
-    .windyMap,
-    .about-section {
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
+  .cardSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+  } 
 
-    .campaign-btn {
-      background: #72edf2;
-      border: none;
-      padding: 10px 25px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #2e3c45;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 200ms ease;
-    }
+  .aboutCard {
+    color: white;
+    text-align: left;
+  }
 
-    .campaign-btn:hover {
-      background: #00a3e0;
-    }
+  .aboutCard h1 {
+    background-color: #00a4e08c;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+  }
 
-    .hotlines {
-        color: white;
-        background-color: #001f3d;
-        padding: 15px;
-        text-align: center;
-        box-shadow: 0 10px 25px rgb(255, 255, 255);
-        border: 1px;
-    }
+  .card {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    padding: 50px;
+    
+  }
 
-    #map {
-      height: 600px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.726);
-      border: 2px #ffffff solid;
-      position: sticky;
-    }
-  </style>
+  .card h1 {
+    text-align: center;
+    color: #2C3E50;
+  }
 
-  <body>
-    <!-- Navigation Bar -->
+  .sectionCard {
+    margin: 20px 0;
+    padding: 60px;
+  }
 
-    <div class="navbar">
-      <a href="index.html" class="logo">ORPHIC</a>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#campaign">Campaigns</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="index.html">Exit</a></li>
-      </ul>
-    </div>
+  .sectionCard h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
 
-    <!-- Main Content -->
-    <main>
-      <section class="weatherStatus">
-        <div class="container">
-          <div class="weather-side">
-            <div class="weather-gradient"></div>
-            <div class="date-container">
-              <h2 class="date-dayname"></h2>
-              <span class="date-day"></span>
-              <i class="fa-solid fa-location-dot"></i>
-              <span class="location">Manolo Fortich, Bukidnon</span>
-            </div>
-            <div class="weather-container">
-              <span class="weather-icon"
-                ><img
-                  src="https://www.weatherbit.io/static/img/icons/c01d.png"
-                  alt="clear sky"
-              /></span>
-              <h1 class="weather-temp"></h1>
-              <h3 class="weather-desc"></h3>
-            </div>
+  .sectionCard ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .sectionCard li {
+    background-color: rgb(59, 120, 170);
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .sectionCard li::before {
+    content: "• ";
+    color: #3498db;
+  }
+
+  .applet-container {
+    flex: 1;
+    max-width: 45%;
+    min-width: 300px;
+  }
+
+  .applet-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #e98848;
+  }
+
+  .campaign-section,
+  .windyMap,
+  .about-section {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .campaign-btn {
+    background: #72edf2;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2e3c45;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 200ms ease;
+  }
+
+  .campaign-btn:hover {
+    background: #00a3e0;
+  }
+
+  .hotlines {
+    color: white;
+    background-color: #001f3d;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgb(255, 255, 255);
+    border: 1px;
+  }
+
+  #map {
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.726);
+    border: 2px #ffffff solid;
+    position: sticky;
+  }
+</style>
+
+<body>
+  <!-- Navigation Bar -->
+
+  <div class="navbar">
+    <a href="index.html" class="logo">ORPHIC</a>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#campaign">Campaigns</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="index.html">Exit</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <section class="weatherStatus">
+      <div class="container">
+        <div class="weather-side">
+          <div class="weather-gradient"></div>
+          <div class="date-container">
+            <h2 class="date-dayname"></h2>
+            <span class="date-day"></span>
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="location">Manolo Fortich, Bukidnon</span>
           </div>
-          <div class="info-side">
-            <div class="today-info-container">
-              <div class="today-info">
-                <div class="humidity">
-                  <span class="title"
-                    ><i class="fa-solid fa-droplet"></i> HUMIDITY</span
-                  >
-                  <span class="value"></span>
-                </div>
-                <div class="wind">
-                  <span class="title"
-                    ><i class="fa-solid fa-wind"></i> WIND</span
-                  >
-                  <span class="value"></span>
-                </div>
-                <!-- Wind Signal Section -->
-                <div class="wind-signal">
-                  <span id="wind-signal">Wind Signal: N/A</span>
-                </div>
+          <div class="weather-container">
+            <span class="weather-icon"><img src="https://www.weatherbit.io/static/img/icons/c01d.png"
+                alt="clear sky" /></span>
+            <h1 class="weather-temp"></h1>
+            <h3 class="weather-desc"></h3>
+          </div>
+        </div>
+        <div class="info-side">
+          <div class="today-info-container">
+            <div class="today-info">
+              <div class="humidity">
+                <span class="title"><i class="fa-solid fa-droplet"></i> HUMIDITY</span>
+                <span class="value"></span>
+              </div>
+              <div class="wind">
+                <span class="title"><i class="fa-solid fa-wind"></i> WIND</span>
+                <span class="value"></span>
+              </div>
+              <!-- Wind Signal Section -->
+              <div class="wind-signal">
+                <span id="wind-signal">Wind Signal: N/A</span>
               </div>
             </div>
-            <div class="week-container">
-              <ul class="week-list">
-                <li>
-                  <span class="day-name"></span>
-                  <span class="day-temp"></span>
-                  <span class="day-icon"></span>
-                </li>
-                <li>
-                  <span class="day-name"></span>
-                  <span class="day-temp"></span>
-                  <span class="day-icon"></span>
-                </li>
-                <li>
-                  <span class="day-name"></span>
-                  <span class="day-temp"></span>
-                  <span class="day-icon"></span>
-                </li>
-                <li>
-                  <span class="day-name"></span>
-                  <span class="day-temp"></span>
-                  <span class="day-icon"></span>
-                </li>
-                <div class="clear"></div>
-              </ul>
-            </div>
-            <div class="location-container">
-              <input
-                class="location-input"
-                type="text"
-                id="city"
-                value="Manolo Fortich"
-                style="border: 1px solid white"
-              />
-            </div>
+          </div>
+          <div class="week-container">
+            <ul class="week-list">
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
+              <div class="clear"></div>
+            </ul>
+          </div>
+          <div class="location-container">
+            <input class="location-input" type="text" id="city" value="Manolo Fortich"
+              style="border: 1px solid white" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Embed Map Section -->
+    <section class="evacuationSection">
+      <div class="evacuationText">
+        <h1>Manolo Fortich: A Snapshot</h1>
+        <p>
+          Manolo Fortich, located in the province of Bukidnon, is a town that
+          is home to 22 barangays (villages). In times of natural disasters or
+          emergencies, it's important for the local community to be prepared
+          and aware of safe evacuation routes and designated evacuation sites.
+        </p>
+        <p>
+          Here are some of the key evacuation sites that have been designated
+          to help residents of Manolo Fortich during emergencies:
+        </p>
+      </div>
+      <div class="applet-container">
+        <h3>Evacuation Sites</h3>
+        <div id="map"></div>
+        <script src="LeafletMap.js"></script>
+      </div>
+    </section>
+
+    <!-- Navigation Bar Sections-->
+    <section class="NavbarSections">
+
+      <section class="cardSection">
+        <div class="aboutCard">
+          <h1>Typhoon Preparedness Guide</h1>
+          <p>Typhoon preparedness is essential for saving lives, protecting property, ensuring the availability of basic
+            necessities, and reducing the long-term impact on communities and economies. By taking the time to plan and
+            prepare, individuals and communities are better equipped to respond effectively and recover swiftly when a
+            typhoon strikes.</p>
+        </div>
+
+        <div class="card">
+
+          <div class="sectionCard">
+            <h2><img src="before-icon.png" alt="Before Icon" class="section-icon"> Before the Typhoon:</h2>
+            <ul>
+              <li><img src="icon1.png" alt="Icon 1" class="list-icon"> Stay informed by monitoring weather updates and
+                warnings.</li>
+              <li><img src="icon2.png" alt="Icon 2" class="list-icon"> Create an emergency kit with water, food,
+                flashlights, first aid, and important documents.</li>
+              <li><img src="icon3.png" alt="Icon 3" class="list-icon"> Prepare your home by securing windows, doors, and
+                outdoor objects.</li>
+              <li><img src="icon4.png" alt="Icon 4" class="list-icon"> Make an evacuation plan and pack a go-bag with
+                essentials.</li>
+              <li><img src="icon5.png" alt="Icon 5" class="list-icon"> Ensure pets are safe and have food and
+                identification tags.</li>
+            </ul>
+          </div>
+
+          <div class="sectionCard">
+            <h2><img src="during-icon.png" alt="During Icon" class="section-icon"> During the Typhoon:</h2>
+            <ul>
+              <li><img src="icon6.png" alt="Icon 6" class="list-icon"> Stay indoors, away from windows and glass doors.
+              </li>
+              <li><img src="icon7.png" alt="Icon 7" class="list-icon"> Avoid using electrical appliances or touching
+                water
+                during heavy rain.</li>
+              <li><img src="icon8.png" alt="Icon 8" class="list-icon"> Continue listening to weather reports for
+                updates.
+              </li>
+              <li><img src="icon9.png" alt="Icon 9" class="list-icon"> If instructed, evacuate early, avoiding flooded
+                areas.</li>
+              <li><img src="icon10.png" alt="Icon 10" class="list-icon"> Do not go outside until authorities declare it
+                safe.</li>
+            </ul>
+          </div>
+
+          <div class="sectionCard">
+            <h2><img src="after-icon.png" alt="After Icon" class="section-icon"> After the Typhoon:</h2>
+            <ul>
+              <li><img src="icon11.png" alt="Icon 11" class="list-icon"> Wait for official confirmation that it is safe
+                to
+                go outside.</li>
+              <li><img src="icon12.png" alt="Icon 12" class="list-icon"> Inspect your home for damage and check for gas
+                leaks.</li>
+              <li><img src="icon13.png" alt="Icon 13" class="list-icon"> Stay away from floodwaters and debris.</li>
+              <li><img src="icon14.png" alt="Icon 14" class="list-icon"> Check on neighbors, especially elderly or
+                vulnerable individuals.</li>
+              <li><img src="icon15.png" alt="Icon 15" class="list-icon"> Document damage for insurance and recovery
+                purposes.</li>
+              <li><img src="icon16.png" alt="Icon 16" class="list-icon"> Limit driving until roads are cleared and safe.
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- Embed Map Section -->
-      <section class="evacuationSection">
-        <div class="evacuationText">
-          <h1>Manolo Fortich: A Snapshot</h1>
-          <p>
-            Manolo Fortich, located in the province of Bukidnon, is a town that
-            is home to 22 barangays (villages). In times of natural disasters or
-            emergencies, it's important for the local community to be prepared
-            and aware of safe evacuation routes and designated evacuation sites.
-          </p>
-          <p>
-            Here are some of the key evacuation sites that have been designated
-            to help residents of Manolo Fortich during emergencies:
-          </p>
-        </div>
-        <div class="applet-container">
-          <h3>Evacuation Sites</h3>
-          <div id="map"></div>
-          <script src="LeafletMap.js"></script>
-        </div>
-      </section>
+      <!-- Campaign-->
+      <div class="campaign-section" id="campaign">
+        <h2>Stay Informed with Accurate Weather Updates</h2>
+        <p>
+          At Orphic, we provide real-time weather information to help you plan
+          your day and stay safe in any condition. Our goal is to offer
+          reliable forecasts and keep you connected with changing weather
+          patterns.
+        </p>
 
-      <!-- Navigation Bar Sections-->
-      <section class="NavbarSections">
-        <!-- Campaign-->
-        <div class="campaign-section" id="campaign">
-          <h2>Stay Informed with Accurate Weather Updates</h2>
-          <p>
-            At Orphic, we provide real-time weather information to help you plan
-            your day and stay safe in any condition. Our goal is to offer
-            reliable forecasts and keep you connected with changing weather
-            patterns.
-          </p>
+        <p>
+          Whether it's a sunny day or a stormy night, we’ve got you covered.
+          Stay prepared and make informed decisions with our easy-to-use
+          weather app.
+        </p>
 
-          <p>
-            Whether it's a sunny day or a stormy night, we’ve got you covered.
-            Stay prepared and make informed decisions with our easy-to-use
-            weather app.
-          </p>
+        <button class="campaign-btn" onclick="downloadApp()">
+          More
+        </button>
+      </div>
 
-          <button class="campaign-btn" onclick="downloadApp()">
-            More
-          </button>
-        </div>
+      <!-- Windy Map-->
+      <div class="windyMap">
+        <h2>Explore Live Weather Data with Windy</h2>
+        <p>
+          Get detailed weather forecasts, interactive maps, and live data for
+          any location with Windy. Stay informed and plan ahead with the most
+          accurate weather information.
+        </p>
 
-        <!-- Windy Map-->
-        <div class="windyMap">
-          <h2>Explore Live Weather Data with Windy</h2>
-          <p>
-            Get detailed weather forecasts, interactive maps, and live data for
-            any location with Windy. Stay informed and plan ahead with the most
-            accurate weather information.
-          </p>
+        <iframe src="https://embed.windy.com/?10.828,123.464,7,m:eflajEQ" class="mapFrame" width="100%" height="500"
+          frameborder="1" allowfullscreen></iframe>
+      </div>
 
-          <iframe
-            src="https://embed.windy.com/?10.828,123.464,7,m:eflajEQ"
-            class="mapFrame"
-            width="100%"
-            height="500"
-            frameborder="1"
-            allowfullscreen
-          ></iframe>
-        </div>
+      <!-- About-->
+      <div class="about-section" id="about">
+        <h2>About Orphic</h2>
+        <p>
+          Orphic is an innovative platform that provides real-time weather
+          updates tailored to the local climate of Manolo Fortich, Bukidnon.
+          Our goal is to help residents and visitors stay informed about
+          current weather conditions, including temperature, humidity, wind
+          speeds, and more, all of which can significantly influence daily
+          activities and the environment.
+        </p>
 
-        <!-- About-->
-        <div class="about-section" id="about">
-          <h2>About Orphic</h2>
-          <p>
-            Orphic is an innovative platform that provides real-time weather
-            updates tailored to the local climate of Manolo Fortich, Bukidnon.
-            Our goal is to help residents and visitors stay informed about
-            current weather conditions, including temperature, humidity, wind
-            speeds, and more, all of which can significantly influence daily
-            activities and the environment.
-          </p>
+        <p>
+          By offering accurate and timely weather forecasts, Orphic empowers
+          the community to make informed decisions about their day-to-day
+          activities. Whether you're planning outdoor events, agriculture
+          activities, or just need to know the weather for travel purposes,
+          Orphic has got you covered. We are dedicated to improving the lives
+          of people in Manolo Fortich by providing essential weather
+          information to help them better prepare for the elements and adapt
+          to local climate patterns.
+        </p>
+      </div>
+    </section>
 
-          <p>
-            By offering accurate and timely weather forecasts, Orphic empowers
-            the community to make informed decisions about their day-to-day
-            activities. Whether you're planning outdoor events, agriculture
-            activities, or just need to know the weather for travel purposes,
-            Orphic has got you covered. We are dedicated to improving the lives
-            of people in Manolo Fortich by providing essential weather
-            information to help them better prepare for the elements and adapt
-            to local climate patterns.
-          </p>
-        </div>
-      </section>
+    <section id="hotlines" class="hotlines">
+      <footer>
+        <h2>Manolo Fortich Emergency Hotlines</h2>
+        <p>
+          Local Disaster Risk Reduction and Management Office (LDRRMO):
+          0915-813-9494
+        </p>
+        <p>Barangay Health Emergency Respose Team (BHERTs): 0956-407-9652</p>
+        <p>Manolo Fortich Rescue: 0915-813-9494</p>
+        <p>Police Department: 0916-313-7327</p>
+      </footer>
+    </section>
+  </main>
 
-      <section id="hotlines" class="hotlines">
-        <footer>
-          <h2>Manolo Fortich Emergency Hotlines</h2>
-          <p>
-            Local Disaster Risk Reduction and Management Office (LDRRMO):
-            0915-813-9494
-          </p>
-          <p>Barangay Health Emergency Respose Team (BHERTs): 0956-407-9652</p>
-          <p>Manolo Fortich Rescue: 0915-813-9494</p>
-          <p>Police Department: 0916-313-7327</p>
-        </footer>
-      </section>
-    </main>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="Home.js"></script>
+</body>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="Home.js"></script>
-  </body>
 </html>
