@@ -12,6 +12,8 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="card.css">
   <title>ORPHIC</title>
 </head>
@@ -134,7 +136,7 @@
     flex-wrap: wrap;
     gap: 2rem;
     padding: 2rem;
-  } 
+  }
 
   .aboutCard {
     color: white;
@@ -142,22 +144,26 @@
   }
 
   .aboutCard h1 {
-    background-color: #00a4e08c;
+    background-color: rgb(59, 120, 170);
     padding: 8px;
     border-radius: 10px;
     text-align: center;
   }
 
   .card {
+    margin-top: -2%;
+    margin-bottom: -2%;
     background-color: rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: row;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 62%;
     max-width: 100%;
     padding: 50px;
-    
+    border: 1px solid white;
+    text-align: center;
+    margin: auto;
   }
 
   .card h1 {
@@ -166,13 +172,14 @@
   }
 
   .sectionCard {
-    margin: 20px 0;
+    margin: 0;
     padding: 60px;
   }
 
   .sectionCard h2 {
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: -50px;
   }
 
   .sectionCard ul {
@@ -183,15 +190,20 @@
   .sectionCard li {
     background-color: rgb(59, 120, 170);
     padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    padding: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
   }
 
-  .sectionCard li::before {
-    content: "• ";
-    color: #3498db;
+  .sectionCard li:hover {
+    transform: scale(1.05);
   }
+
+  
 
   .applet-container {
     flex: 1;
@@ -205,7 +217,14 @@
     color: #e98848;
   }
 
-  .campaign-section,
+  .campaign-section {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
   .windyMap,
   .about-section {
     padding: 20px;
@@ -257,7 +276,7 @@
     <a href="index.html" class="logo">ORPHIC</a>
     <ul>
       <li><a href="#">Home</a></li>
-      <li><a href="#campaign">Campaigns</a></li>
+      <li><a href="#guide">Guide</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="index.html">Exit</a></li>
     </ul>
@@ -301,6 +320,16 @@
           </div>
           <div class="week-container">
             <ul class="week-list">
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
+              <li>
+                <span class="day-name"></span>
+                <span class="day-temp"></span>
+                <span class="day-icon"></span>
+              </li>
               <li>
                 <span class="day-name"></span>
                 <span class="day-temp"></span>
@@ -366,119 +395,120 @@
             typhoon strikes.</p>
         </div>
 
-        <div class="card">
+        <div class="card" id="guide">
 
           <div class="sectionCard">
-            <h2><img src="before-icon.png" alt="Before Icon" class="section-icon"> Before the Typhoon:</h2>
+            <h2> Before the Typhoon:</h2>
             <ul>
-              <li><img src="icon1.png" alt="Icon 1" class="list-icon"> Stay informed by monitoring weather updates and
-                warnings.</li>
-              <li><img src="icon2.png" alt="Icon 2" class="list-icon"> Create an emergency kit with water, food,
-                flashlights, first aid, and important documents.</li>
-              <li><img src="icon3.png" alt="Icon 3" class="list-icon"> Prepare your home by securing windows, doors, and
-                outdoor objects.</li>
-              <li><img src="icon4.png" alt="Icon 4" class="list-icon"> Make an evacuation plan and pack a go-bag with
-                essentials.</li>
-              <li><img src="icon5.png" alt="Icon 5" class="list-icon"> Ensure pets are safe and have food and
-                identification tags.</li>
+              <li><i class="fas fa-cloud-sun list-icon fa-3x"></i> Stay informed by monitoring weather updates and
+                warnings.
+              </li>
+              <li><i class="fas fa-box list-icon fa-3x"></i> Create an emergency kit with water, food, flashlights,
+                first aid,
+                and important documents.</li>
+              <li><i class="fas fa-home list-icon fa-3x"></i> Prepare your home by securing windows, doors, and outdoor
+                objects.</li>
+              <li><i class="fas fa-bag list-icon fa-3x"></i> Make an evacuation plan and pack a go-bag with essentials.
+              </li>
+              <li><i class="fas fa-paw list-icon fa-3x"></i> Ensure pets are safe and have food and identification tags.
+              </li>
             </ul>
           </div>
 
           <div class="sectionCard">
-            <h2><img src="during-icon.png" alt="During Icon" class="section-icon"> During the Typhoon:</h2>
+            <h2>During the Typhoon:</h2>
             <ul>
-              <li><img src="icon6.png" alt="Icon 6" class="list-icon"> Stay indoors, away from windows and glass doors.
+              <li><i class="fas fa-house-damage list-icon fa-3x"></i> Stay indoors, away from windows and glass doors.
               </li>
-              <li><img src="icon7.png" alt="Icon 7" class="list-icon"> Avoid using electrical appliances or touching
-                water
-                during heavy rain.</li>
-              <li><img src="icon8.png" alt="Icon 8" class="list-icon"> Continue listening to weather reports for
-                updates.
+              <li><i class="fas fa-plug list-icon fa-3x"></i> Avoid using electrical appliances or touching water during
+                heavy
+                rain.</li>
+              <li><i class="fas fa-volume-up list-icon fa-3x"></i> Continue listening to weather reports for updates.
               </li>
-              <li><img src="icon9.png" alt="Icon 9" class="list-icon"> If instructed, evacuate early, avoiding flooded
-                areas.</li>
-              <li><img src="icon10.png" alt="Icon 10" class="list-icon"> Do not go outside until authorities declare it
+              <li><i class="fas fa-umbrella list-icon fa-3x"></i> If instructed, evacuate early, avoiding flooded areas.
+              </li>
+              <li><i class="fas fa-door-closed list-icon fa-3x"></i> Do not go outside until authorities declare it
                 safe.</li>
             </ul>
           </div>
 
           <div class="sectionCard">
-            <h2><img src="after-icon.png" alt="After Icon" class="section-icon"> After the Typhoon:</h2>
+            <h2>After the Typhoon:</h2>
             <ul>
-              <li><img src="icon11.png" alt="Icon 11" class="list-icon"> Wait for official confirmation that it is safe
-                to
-                go outside.</li>
-              <li><img src="icon12.png" alt="Icon 12" class="list-icon"> Inspect your home for damage and check for gas
-                leaks.</li>
-              <li><img src="icon13.png" alt="Icon 13" class="list-icon"> Stay away from floodwaters and debris.</li>
-              <li><img src="icon14.png" alt="Icon 14" class="list-icon"> Check on neighbors, especially elderly or
-                vulnerable individuals.</li>
-              <li><img src="icon15.png" alt="Icon 15" class="list-icon"> Document damage for insurance and recovery
-                purposes.</li>
-              <li><img src="icon16.png" alt="Icon 16" class="list-icon"> Limit driving until roads are cleared and safe.
+              <li><i class="fas fa-check-circle list-icon fa-3x"></i> Wait for official confirmation that it is safe to
+                go
+                outside.</li>
+              <li><i class="fas fa-tools list-icon fa-3x"></i> Inspect your home for damage and check for gas leaks.
               </li>
+              <li><i class="fas fa-water list-icon fa-3x"></i> Stay away from floodwaters and debris.</li>
+              <li><i class="fas fa-users list-icon fa-3x"></i> Check on neighbors, especially elderly or vulnerable
+                individuals.</li>
+              <li><i class="fas fa-camera list-icon fa-3x"></i> Document damage for insurance and recovery purposes.
+              </li>
+              <li><i class="fas fa-car list-icon fa-3x"></i> Limit driving until roads are cleared and safe.</li>
             </ul>
           </div>
         </div>
+
       </section>
 
-      <!-- Campaign-->
-      <div class="campaign-section" id="campaign">
-        <h2>Stay Informed with Accurate Weather Updates</h2>
-        <p>
-          At Orphic, we provide real-time weather information to help you plan
-          your day and stay safe in any condition. Our goal is to offer
-          reliable forecasts and keep you connected with changing weather
-          patterns.
-        </p>
+      
+        <!-- Windy Map-->
+        <div class="windyMap">
+          <h2>Explore Live Weather Data with Windy</h2>
+          <p>
+            Get detailed weather forecasts, interactive maps, and live data for
+            any location with Windy. Stay informed and plan ahead with the most
+            accurate weather information.
+          </p>
 
-        <p>
-          Whether it's a sunny day or a stormy night, we’ve got you covered.
-          Stay prepared and make informed decisions with our easy-to-use
-          weather app.
-        </p>
+          <iframe src="https://embed.windy.com/?10.828,123.464,7,m:eflajEQ" class="mapFrame" width="100%" height="500"
+            frameborder="1" allowfullscreen></iframe>
+        </div>
 
-        <button class="campaign-btn" onclick="downloadApp()">
-          More
-        </button>
-      </div>
+        <!-- About-->
+        <div class="about-section" id="about">
+          <h2>About Orphic</h2>
+          <p>
+            Orphic is an innovative platform that provides real-time weather
+            updates tailored to the local climate of Manolo Fortich, Bukidnon.
+            Our goal is to help residents and visitors stay informed about
+            current weather conditions, including temperature, humidity, wind
+            speeds, and more, all of which can significantly influence daily
+            activities and the environment.
+          </p>
 
-      <!-- Windy Map-->
-      <div class="windyMap">
-        <h2>Explore Live Weather Data with Windy</h2>
-        <p>
-          Get detailed weather forecasts, interactive maps, and live data for
-          any location with Windy. Stay informed and plan ahead with the most
-          accurate weather information.
-        </p>
+          <p>
+            By offering accurate and timely weather forecasts, Orphic empowers
+            the community to make informed decisions about their day-to-day
+            activities. Whether you're planning outdoor events, agriculture
+            activities, or just need to know the weather for travel purposes,
+            Orphic has got you covered. We are dedicated to improving the lives
+            of people in Manolo Fortich by providing essential weather
+            information to help them better prepare for the elements and adapt
+            to local climate patterns.
+          </p>
+          <!-- Campaign-->
+          <div class="campaign-section" id="campaign">
+            <h2>Stay Informed with Accurate Weather Updates</h2>
+            <p>
+              At Orphic, we provide real-time weather information to help you plan
+              your day and stay safe in any condition. Our goal is to offer
+              reliable forecasts and keep you connected with changing weather
+              patterns.
+            </p>
 
-        <iframe src="https://embed.windy.com/?10.828,123.464,7,m:eflajEQ" class="mapFrame" width="100%" height="500"
-          frameborder="1" allowfullscreen></iframe>
-      </div>
+            <p>
+              Whether it's a sunny day or a stormy night, we’ve got you covered.
+              Stay prepared and make informed decisions with our easy-to-use
+              weather app.
+            </p>
 
-      <!-- About-->
-      <div class="about-section" id="about">
-        <h2>About Orphic</h2>
-        <p>
-          Orphic is an innovative platform that provides real-time weather
-          updates tailored to the local climate of Manolo Fortich, Bukidnon.
-          Our goal is to help residents and visitors stay informed about
-          current weather conditions, including temperature, humidity, wind
-          speeds, and more, all of which can significantly influence daily
-          activities and the environment.
-        </p>
-
-        <p>
-          By offering accurate and timely weather forecasts, Orphic empowers
-          the community to make informed decisions about their day-to-day
-          activities. Whether you're planning outdoor events, agriculture
-          activities, or just need to know the weather for travel purposes,
-          Orphic has got you covered. We are dedicated to improving the lives
-          of people in Manolo Fortich by providing essential weather
-          information to help them better prepare for the elements and adapt
-          to local climate patterns.
-        </p>
-      </div>
+            <button class="campaign-btn" onclick="downloadApp()">
+              Know More
+            </button>
+          </div>
+        </div>
     </section>
 
     <section id="hotlines" class="hotlines">
