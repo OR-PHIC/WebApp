@@ -1,21 +1,20 @@
 .container {
     border-radius: 25px;
     color: #ffffff;
-    height: 400px;
+    height: 600px;
     width: 90%;
-    max-width: 1600px;
-    margin: 80px;
+    margin: 50px;
     display: flex;
     justify-content: center;
-    padding: 20px;
-    margin-bottom: 160px;
+    gap: 50px;
+    flex-wrap: wrap;
 }
 
 .weather-side {
     position: relative;
     height: 100%;
     border-radius: 25px;
-    background-image: url("https://img.freepik.com/free-photo/sunset-beach-sea-wave_1150-11145.jpg");
+    background-image: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgObTqTBn0solJZ4I3b1F8fcnDfq5-kc5CXivUn3I3QsCkZbKZxdndsYBdTb5BAK-Ex1_nHEeAjFcYgjsDmIfQBAqYOagULwvZ-a7hZaCw4SeB2KMTuyXDuwV1S7fApPEmfgusAOJf0YnLnFB-GzWmX-juk9mVZNx-i56aq_jnMgijqL3WabX5xyQ5/s1600/kaamulan8.jpg.jpg");
     width: 300px;
     box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
     transition: transform 300ms ease;
@@ -117,10 +116,14 @@
     color: #ffdd57;
 }
 
+.week-container {
+    padding: 10px;
+    display: flex;
+}
+
 .week-list {
     list-style-type: none;
-    padding: 0;
-    margin: 10px 35px;
+    padding: 10px;
     box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 }
@@ -132,6 +135,7 @@
     transition: 200ms ease;
     border-radius: 10px;
     text-align: center;
+    
 }
 
 .week-list>li:hover {
@@ -174,11 +178,6 @@
     margin-top: 15px;
     font-weight: 700;
     margin-bottom: 25px;
-}
-
-.location-container {
-    padding: 25px 35px;
-    margin-top: 25%;
 }
 
 .location-input {
